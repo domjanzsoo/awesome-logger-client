@@ -1,9 +1,9 @@
 import React from 'react';
-import Routes from './Routes/Routes.component.js';
+import MainRouter from './routing/Routes.component.js';
 
 function App() {
   return (
-    <Routes />
+    <MainRouter />
   );
 }
 

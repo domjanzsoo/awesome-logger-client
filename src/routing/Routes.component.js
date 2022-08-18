@@ -5,8 +5,11 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Home from '../pages/Home.component.js';
+import JobLogs from '../pages/JobLogs.component.js';
 
-export default () => {
+
+const MainRouter = () => {
   return (
     <Router>
     <div>
@@ -26,17 +29,13 @@ export default () => {
 
 
       <Routes>
-        <Route path="/job-logs">
-          () => return (<>'Job logs'</>)
-        </Route>
-        <Route path="/add-job-log">
-          () => return (<>'Job logs to be added'</>)
-        </Route>
-        <Route path="/">
-          () => return <>'Awesome Logger'</>
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/job-logs" element={<JobLogs />} />
       </Routes>
+
     </div>
   </Router>
 );
 }
+
+export default MainRouter;
