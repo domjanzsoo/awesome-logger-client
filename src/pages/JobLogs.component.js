@@ -73,7 +73,8 @@ const Table = ({ columns, data }) => {
   )
 }
 
-
+// In an ideal world, this should be called in a Redux action list or some other
+// more organized state handling system
 const JobLogs = () => {
   const [tableData, setTableData] = useState([]);
 

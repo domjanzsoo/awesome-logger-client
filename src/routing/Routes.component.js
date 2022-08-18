@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Home from '../pages/Home.component.js';
 import JobLogs from '../pages/JobLogs.component.js';
+import NewJobLog from '../pages/NewJobLog.component.js';
 
 
 const MainRouter = () => {
@@ -31,6 +32,7 @@ const MainRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/job-logs" element={<JobLogs />} />
+        <Route path="/add-job-logs" element={<NewJobLog />} />
       </Routes>
 
     </div>
