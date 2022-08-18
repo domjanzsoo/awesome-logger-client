@@ -1,7 +1,7 @@
-import react from 'React';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link
 } from "react-router-dom";
@@ -13,30 +13,29 @@ export default () => {
       <nav>
         <ul>
           <li>
-            <Link to="/"></Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/job-logs">All Logs</Link>
           </li>
           <li>
-            <Link to="/users">Users</Link>
+            <Link to="/add-job-logs">Add New Log</Link>
           </li>
         </ul>
       </nav>
 
-      {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-      <Switch>
-        <Route path="/about">
-          <About />
+
+      <Routes>
+        <Route path="/job-logs">
+          () => return (<>'Job logs'</>)
         </Route>
-        <Route path="/users">
-          <Users />
+        <Route path="/add-job-log">
+          () => return (<>'Job logs to be added'</>)
         </Route>
         <Route path="/">
-          <Home />
+          () => return <>'Awesome Logger'</>
         </Route>
-      </Switch>
+      </Routes>
     </div>
   </Router>
 );
