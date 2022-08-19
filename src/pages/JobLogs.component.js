@@ -109,6 +109,10 @@ const JobLogs = () => {
           {
             Header: 'Property',
             accessor: 'property.name'
+          },
+          {
+            Header: 'Raised By',
+            accessor: 'raised_by'
           }
         ]
   );

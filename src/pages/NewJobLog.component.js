@@ -43,7 +43,6 @@ const NewJobLog = () => {
   const [properties, setProperties] = useState([]);
   const [summary, setSummary] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('');
   const [propertyId, setPropertyId] = useState(0);
 
   useEffect(() => {
@@ -62,11 +61,11 @@ const NewJobLog = () => {
     event.preventDefault();
 
 // With a hook like useForm, this could be more simplified
-    if(description.lenght === 0 || status.length === 0 || summary.length === 0 || propertyId === 0) {
+    if(description.lenght === 0 || summary.length === 0 || propertyId === 0) {
       alert('Oops .. something missing');
     } else {
       const property_id = parseInt(propertyId);
-      const data = {description, summary, property_id, status}
+      const data = {description, summary, property_id}
 
       await axios.post(`${process.env.REACT_APP_API_URL}/job`, data).then(response => {
         console.log(response);
@@ -90,21 +89,6 @@ const NewJobLog = () => {
         </div>
         <div className="span-container">
           <label>
-            Status:
-              <select name="status" onChange={event => setStatus(event.target.value)}>
-              // No form validation for now, but at least it's functional
-                <option value={""} >
-                  Choose an option
-                </option>
-                <option value="open">Open</option>
-                <option value={"in progress"}>In Progress</option>
-                <option value={"completed"}>Completed</option>
-                <option value={"cancelled"}>Cancelled</option>
-              </select>
-          </label>
-        </div>
-        <div className="span-container">
-          <label>
             Property:
               <select name="property_id" onChange={event => setPropertyId(event.target.value)}>
               // No form validation for now, but at least it's functional
@@ -117,7 +101,6 @@ const NewJobLog = () => {
                       return <option value={property.id} key={property.id}>
                               {property.name}
                             </option>
-
                     })
                 }
               </select>
