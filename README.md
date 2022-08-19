@@ -1,3 +1,5 @@
+Update the .env file with the correct url to the api.
+
 This is a standard react app. In order to run it, just install all the dependecies by running
 
 `npm install`
