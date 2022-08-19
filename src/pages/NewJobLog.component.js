@@ -40,29 +40,42 @@ const Styles = styled.div`
 `;
 
 const NewJobLog = () => {
-  console.log(process.env.REACT_APP_API_URL);
   const [properties, setProperties] = useState([]);
+  const [summary, setSummary] = useState('');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState('');
+  const [propertyId, setPropertyId] = useState(0);
 
   useEffect(() => {
     getProperties();
-
-    console.log(properties);
   }, []);
 
 
 
   const getProperties = async () => {
-    await axios.get(process.env.REACT_APP_API_URL + '/properties').then(data => {
-      console.log('the data');
-      console.log(data.data);
-
+    await axios.get(`${process.env.REACT_APP_API_URL}/properties`).then(data => {
       setProperties(data.data);
     }).catch(error => console.log(error));
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(event.target);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+// With a hook like useForm, this could be more simplified
+    if(description.lenght === 0 || status.length === 0 || summary.length === 0 || propertyId === 0) {
+      alert('Oops .. something missing');
+    } else {
+      const property_id = parseInt(propertyId);
+      const data = {description, summary, property_id, status}
+
+      await axios.post(`${process.env.REACT_APP_API_URL}/job`, data).then(response => {
+        console.log(response);
+      }).catch(error => console.log(error));
+
+      event.target.reset();
+
+      alert('Job log successfully created');
+    }
   }
 
   return (
@@ -71,16 +84,16 @@ const NewJobLog = () => {
       <form onSubmit={handleSubmit}>
         <div className="span-container">
           <label>
-            Name:
-            <input type="text" name="summary" />
+            Summary:
+            <input type="text" name="summary" onChange={event => setSummary(event.target.value)}/>
           </label>
         </div>
         <div className="span-container">
           <label>
             Status:
-              <select name="status">
+              <select name="status" onChange={event => setStatus(event.target.value)}>
               // No form validation for now, but at least it's functional
-                <option value={null} disabled>
+                <option value={""} >
                   Choose an option
                 </option>
                 <option value="open">Open</option>
@@ -92,8 +105,8 @@ const NewJobLog = () => {
         </div>
         <div className="span-container">
           <label>
-            Status:
-              <select name="property_id">
+            Property:
+              <select name="property_id" onChange={event => setPropertyId(event.target.value)}>
               // No form validation for now, but at least it's functional
                 <option value="none">
                   Choose an option
@@ -115,7 +128,7 @@ const NewJobLog = () => {
             Description:
           </label>
           <div className="textarea-container">
-            <textarea name="description" rows="10" cols="28"></textarea>
+            <textarea name="description" rows="10" cols="28" onChange={event => setDescription(event.target.value)}></textarea>
           </div>
         </div>
           <input type="submit" value="Submit" />

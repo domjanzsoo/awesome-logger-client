@@ -33,7 +33,6 @@ const Styles = styled.div`
 `;
 
 const Table = ({ columns, data }) => {
-  // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
     getTableBodyProps,
@@ -45,7 +44,6 @@ const Table = ({ columns, data }) => {
     data,
   })
 
-  // Render the UI for your table
   return (
     <table {...getTableProps()}>
       <thead>
@@ -80,8 +78,6 @@ const JobLogs = () => {
 
   const getLogs = async () => {
     await axios.get(process.env.REACT_APP_API_URL + '/jobs').then(data => {
-      console.log('the data');
-      console.log(data.data);
 
       setTableData(data.data);
     }).catch(error => console.log(error));
