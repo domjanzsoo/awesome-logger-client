@@ -1,3 +1,12 @@
+This is a standard react app. In order to run it, just install all the dependecies by running
+
+`npm install`
+
+and then follow the steps below.
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
